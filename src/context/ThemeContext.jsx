@@ -4,26 +4,50 @@ export const THEMES = [
   {
     id: 'tathe',
     name: 'TATHE Original',
-    shortName: 'TATHE',
-    badge: 'Original',
-    indicatorColor: '#00e575', // Bright TATHE Green
-    tagline: 'Deep Navy & Bright Green (Default)',
+    shortName: 'Original',
+    badge: 'Navy + Green',
+    indicatorColor: '#00e575',
+    tagline: 'Deep navy + TATHE green & brand accents',
   },
   {
-    id: 'alternate',
-    name: 'Alternate Accent',
-    shortName: 'Alternate',
-    badge: 'Cobalt / Cyan',
-    indicatorColor: '#00D2FF', // Vivid Cyan
-    tagline: 'Electric Sapphire & Vivid Cyan',
+    id: 'energy',
+    name: 'TATHE Energy',
+    shortName: 'Energy',
+    badge: 'Navy + Red/Orange',
+    indicatorColor: '#FF4D26',
+    tagline: 'Deep navy + bold red/orange accents',
+  },
+  {
+    id: 'blue',
+    name: 'TATHE Blue',
+    shortName: 'Blue',
+    badge: 'Navy + Electric Blue',
+    indicatorColor: '#00A3FF',
+    tagline: 'Deep navy + electric corporate blue',
+  },
+  {
+    id: 'emerald',
+    name: 'TATHE Emerald',
+    shortName: 'Emerald',
+    badge: 'Navy + Emerald/Teal',
+    indicatorColor: '#00E5A3',
+    tagline: 'Deep navy + vivid emerald & teal',
+  },
+  {
+    id: 'sunset',
+    name: 'TATHE Sunset',
+    shortName: 'Sunset',
+    badge: 'Navy + Orange/Amber',
+    indicatorColor: '#FF9900',
+    tagline: 'Deep navy + warm sunset amber & gold',
   },
   {
     id: 'light',
     name: 'Light Corporate',
     shortName: 'Light',
-    badge: 'Enterprise Light',
-    indicatorColor: '#059669', // Rich Emerald Green
-    tagline: 'Crisp White & Emerald Enterprise',
+    badge: 'Corporate Grey',
+    indicatorColor: '#00A859',
+    tagline: 'Grey-toned corporate hierarchy with crisp depth',
   },
 ];
 

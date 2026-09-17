@@ -55,13 +55,17 @@ export default function TechEnablement({ onOpenHireModal }) {
             </div>
           </div>
 
-          {/* Right 6 Verified Tools Grid */}
+          {/* Right 6 Verified Tools (Mobile Swipe Carousel / Desktop 2-col Grid) */}
           <div className="lg:col-span-6">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <div className="flex md:hidden items-center justify-between text-xs text-[var(--text-muted)] font-medium mb-3 px-1">
+              <span>6 Proprietary Platforms</span>
+              <span className="text-[10px] text-[var(--accent-primary)] font-semibold">Swipe →</span>
+            </div>
+            <div className="flex sm:grid sm:grid-cols-2 gap-4 sm:gap-5 overflow-x-auto sm:overflow-x-visible snap-x snap-mandatory sm:snap-none scrollbar-none pb-3 sm:pb-0 -mx-4 px-4 sm:mx-0 sm:px-0">
               {techTools.map((tool, idx) => (
                 <div 
                   key={idx}
-                  className="p-6 rounded-2xl bg-[var(--background-card)] border border-[var(--border)] hover:border-[var(--accent-primary)] shadow-lg hover:shadow-xl transition-all duration-200 text-left group"
+                  className="w-[76vw] max-w-[300px] sm:w-auto shrink-0 sm:shrink snap-start p-6 rounded-2xl bg-[var(--background-card)] border border-[var(--border)] hover:border-[var(--accent-primary)] shadow-lg hover:shadow-xl transition-all duration-200 text-left group"
                 >
                   <div className="w-12 h-12 rounded-xl bg-[var(--icon-bg)] text-[var(--accent-primary)] border border-[var(--icon-border)] group-hover:bg-[var(--accent-primary)] group-hover:text-[var(--button-primary-text)] transition-colors flex items-center justify-center mb-4">
                     <Database className="w-6 h-6" />

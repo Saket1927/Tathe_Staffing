@@ -70,20 +70,26 @@ export default function IndustriesSection({ onOpenHireModal }) {
           ))}
         </div>
 
-        {/* 9 Large Visual Industry Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10">
+        {/* Mobile Swipe Notice */}
+        <div className="flex md:hidden items-center justify-between text-xs text-[var(--text-muted)] font-medium mb-3 px-1">
+          <span>9 Industry Sectors</span>
+          <span className="text-[10px] text-[var(--accent-primary)] font-semibold">Swipe to explore →</span>
+        </div>
+
+        {/* 9 Visual Industry Cards (Mobile Swipe Carousel ~1.2 cards / Desktop 3-col Grid) */}
+        <div className="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-10 overflow-x-auto md:overflow-x-visible snap-x snap-mandatory md:snap-none scrollbar-none pb-4 md:pb-0 -mx-4 px-4 md:mx-0 md:px-0">
           {filteredIndustries.map((item) => {
             const IconComponent = iconMap[item.icon] || Factory;
             return (
               <div 
                 key={item.id}
-                className="group relative bg-[var(--background-card)] hover:bg-[var(--background-card-hover)] rounded-3xl overflow-hidden border border-[var(--border)] hover:border-[var(--accent-primary)] shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between hover:-translate-y-1.5 text-left"
+                className="w-[84vw] max-w-[340px] md:w-auto shrink-0 md:shrink snap-start md:snap-align-none group relative bg-[var(--background-card)] hover:bg-[var(--background-card-hover)] rounded-3xl overflow-hidden border border-[var(--border)] hover:border-[var(--accent-primary)] shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between hover:-translate-y-1.5 text-left"
               >
                 {/* Top Accent Line on Card Hover */}
                 <div className="absolute top-0 left-0 right-0 h-1 bg-transparent group-hover:bg-[var(--accent-primary)] transition-colors duration-300 z-20"></div>
 
                 {/* Real High-Res Photography Header */}
-                <div className="relative h-60 sm:h-64 w-full overflow-hidden">
+                <div className="relative h-48 sm:h-64 w-full overflow-hidden">
                   <img 
                     src={item.image} 
                     alt={`${item.name} workforce`}

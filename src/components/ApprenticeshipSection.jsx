@@ -162,9 +162,9 @@ export default function ApprenticeshipSection({ onOpenHireModal, onOpenJobModal 
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="flex sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 overflow-x-auto sm:overflow-x-visible snap-x snap-mandatory sm:snap-none scrollbar-none pb-2 sm:pb-0 -mx-4 px-4 sm:mx-0 sm:px-0">
             {skillDevelopmentData.pillars.map((pillar, idx) => (
-              <div key={idx} className="p-6 rounded-2xl bg-[var(--background-secondary)] border border-[var(--border)] hover:border-[var(--accent-primary)] transition-colors">
+              <div key={idx} className="w-[78vw] sm:w-auto shrink-0 snap-start p-6 rounded-2xl bg-[var(--background-secondary)] border border-[var(--border)] hover:border-[var(--accent-primary)] transition-colors">
                 <div className="text-[var(--accent-primary)] text-xs font-bold mb-1.5">PILLAR 0{idx + 1}</div>
                 <h4 className="text-lg font-bold text-[var(--text-primary)] mb-2">{pillar.title}</h4>
                 <p className="text-sm text-[var(--text-secondary)] leading-relaxed font-normal">{pillar.desc}</p>

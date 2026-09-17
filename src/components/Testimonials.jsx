@@ -49,12 +49,12 @@ export default function Testimonials() {
           </div>
         </div>
 
-        {/* Testimonials Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Testimonials (Mobile Swipe Carousel ~1.2 cards / Desktop 3-col Grid) */}
+        <div className="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-8 overflow-x-auto md:overflow-x-visible snap-x snap-mandatory md:snap-none scrollbar-none pb-4 md:pb-0 -mx-4 px-4 md:mx-0 md:px-0">
           {testimonialsData.map((item, idx) => (
             <div 
               key={idx}
-              className="bg-[var(--background-card)] hover:bg-[var(--background-card-hover)] rounded-3xl p-8 border border-[var(--border)] hover:border-[var(--accent-primary)] shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between text-left group hover:-translate-y-1"
+              className="w-[84vw] max-w-[360px] md:w-auto shrink-0 md:shrink snap-start md:snap-align-none bg-[var(--background-card)] hover:bg-[var(--background-card-hover)] rounded-3xl p-6 sm:p-8 border border-[var(--border)] hover:border-[var(--accent-primary)] shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between text-left group hover:-translate-y-1"
             >
               <div>
                 {/* 5 Stars */}

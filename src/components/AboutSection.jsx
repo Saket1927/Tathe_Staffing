@@ -89,15 +89,15 @@ export default function AboutSection({ onOpenHireModal }) {
             </h3>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="flex sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 overflow-x-auto sm:overflow-x-visible snap-x snap-mandatory sm:snap-none scrollbar-none pb-3 sm:pb-0 -mx-4 px-4 sm:mx-0 sm:px-0">
             {whyChooseUs.map((item, idx) => (
-              <div key={idx} className="p-6 rounded-2xl bg-[var(--background-card)] hover:bg-[var(--background-card-hover)] border border-[var(--border)] hover:border-[var(--accent-primary)] shadow-sm transition-all flex flex-col justify-between">
+              <div key={idx} className="w-[78vw] max-w-[320px] sm:w-auto shrink-0 sm:shrink snap-start p-6 rounded-2xl bg-[var(--background-card)] hover:bg-[var(--background-card-hover)] border border-[var(--border)] hover:border-[var(--accent-primary)] shadow-sm transition-all flex flex-col justify-between">
                 <div>
-                  <div className="flex items-center gap-2.5 mb-2.5 text-[var(--text-primary)] font-bold text-lg">
+                  <div className="flex items-center gap-2.5 mb-2.5 text-[var(--text-primary)] font-bold text-base sm:text-lg">
                     <CheckCircle className="w-5 h-5 text-[var(--accent-primary)] shrink-0" />
                     <span>{item.title}</span>
                   </div>
-                  <p className="text-sm text-[var(--text-secondary)] leading-relaxed font-normal">
+                  <p className="text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed font-normal">
                     {item.desc}
                   </p>
                 </div>
@@ -108,7 +108,7 @@ export default function AboutSection({ onOpenHireModal }) {
 
         {/* Corporate Values */}
         <div className="pt-4 text-left border-t border-[var(--border)]">
-          <div className="mb-10 pt-8">
+          <div className="mb-8 pt-8">
             <span className="text-xs sm:text-sm font-extrabold text-[var(--accent-primary)] uppercase tracking-wider">
               GUIDING PRINCIPLES
             </span>
@@ -117,13 +117,13 @@ export default function AboutSection({ onOpenHireModal }) {
             </h3>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="flex sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 overflow-x-auto sm:overflow-x-visible snap-x snap-mandatory sm:snap-none scrollbar-none pb-3 sm:pb-0 -mx-4 px-4 sm:mx-0 sm:px-0">
             {valuesData.map((val, idx) => (
-              <div key={idx} className="p-6 rounded-2xl bg-[var(--background-card)] border border-[var(--border)] hover:border-[var(--accent-primary)] shadow-sm transition-all">
+              <div key={idx} className="w-[72vw] max-w-[280px] sm:w-auto shrink-0 sm:shrink snap-start p-6 rounded-2xl bg-[var(--background-card)] border border-[var(--border)] hover:border-[var(--accent-primary)] shadow-sm transition-all">
                 <div className="w-12 h-12 rounded-xl bg-[var(--icon-bg)] text-[var(--accent-primary)] border border-[var(--icon-border)] flex items-center justify-center mb-4">
                   <Compass className="w-6 h-6 stroke-[1.8]" />
                 </div>
-                <h4 className="text-lg font-bold text-[var(--text-primary)] font-heading mb-2">
+                <h4 className="text-base sm:text-lg font-bold text-[var(--text-primary)] font-heading mb-2">
                   {val.title}
                 </h4>
                 <p className="text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed font-normal">

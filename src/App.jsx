@@ -44,14 +44,14 @@ export default function App() {
 
   return (
     <ThemeProvider>
-      <div className="min-h-screen bg-[var(--background-primary)] font-sans antialiased text-[var(--text-primary)] selection:bg-[var(--accent-primary)]/30 selection:text-white transition-colors duration-300">
+      <div className="min-h-screen bg-[var(--background-primary)] font-sans antialiased text-[var(--text-primary)] selection:bg-[var(--accent-primary)]/30 selection:text-white transition-colors duration-300 overflow-x-hidden w-full">
       {/* 1. Header: Simplified, Spacious, Mobile logo + hamburger only */}
       <Header 
         onOpenHireModal={() => handleOpenHireModal()} 
         onOpenJobModal={handleOpenJobModal}
       />
 
-      <main>
+      <main className="overflow-x-hidden w-full">
         {/* 2. Hero: Dark Navy / Cinematic with "Powering People. Building Possibilities." */}
         <Hero 
           onOpenHireModal={() => handleOpenHireModal()} 

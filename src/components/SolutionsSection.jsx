@@ -75,65 +75,71 @@ export default function SolutionsSection({ onOpenHireModal, onSelectService }) {
           </div>
         </div>
 
-        {/* TAB 1: 6 Core Staffing Cards */}
+        {/* TAB 1: 6 Core Staffing Cards (Mobile Swipe Carousel ~1.2 cards visible / Desktop 3-col Grid) */}
         {activeTab === 'staffing' && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            {staffingSolutions.map((service) => {
-              const IconComponent = iconMap[service.icon] || Briefcase;
-              return (
-                <div 
-                  key={service.id}
-                  className="group bg-[var(--background-card)] hover:bg-[var(--background-card-hover)] rounded-3xl p-8 border border-[var(--border)] hover:border-[var(--accent-primary)] shadow-xl transition-all duration-300 flex flex-col justify-between hover:-translate-y-1 relative text-left"
-                >
-                  <div>
-                    {/* Icon + Category Pill */}
-                    <div className="flex items-center justify-between mb-6">
-                      <div className="w-16 h-16 rounded-2xl bg-[var(--icon-bg)] text-[var(--accent-primary)] border border-[var(--icon-border)] group-hover:bg-[var(--accent-primary)] group-hover:text-[var(--button-primary-text)] transition-colors duration-200 flex items-center justify-center shadow-sm">
-                        <IconComponent className="w-8 h-8 stroke-[1.75]" />
-                      </div>
-                      <span className="text-xs font-semibold px-3 py-1 rounded-full bg-[var(--background-secondary)] text-[var(--text-muted)] border border-[var(--border)]">
-                        Enterprise
-                      </span>
-                    </div>
-
-                    <h3 className="font-heading text-2xl font-bold text-[var(--text-primary)] group-hover:text-[var(--accent-primary)] transition-colors">
-                      {service.title}
-                    </h3>
-
-                    <p className="text-sm sm:text-base text-[var(--text-secondary)] mt-3 leading-relaxed">
-                      {service.shortDesc}
-                    </p>
-
-                    {/* Bullet Deliverables */}
-                    <div className="mt-6 space-y-2.5 border-t border-[var(--border)] pt-5">
-                      {service.features.slice(0, 3).map((feat, idx) => (
-                        <div key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-[var(--text-secondary)]">
-                          <Check className="w-4 h-4 text-[var(--accent-primary)] shrink-0 mt-0.5" />
-                          <span>{feat}</span>
+          <div>
+            <div className="flex md:hidden items-center justify-between text-xs text-[var(--text-muted)] font-medium mb-3 px-1">
+              <span>6 Service Models</span>
+              <span className="text-[10px] text-[var(--accent-primary)] font-semibold">Swipe to explore →</span>
+            </div>
+            <div className="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-8 overflow-x-auto md:overflow-x-visible snap-x snap-mandatory md:snap-none scrollbar-none pb-4 md:pb-0 -mx-4 px-4 md:mx-0 md:px-0">
+              {staffingSolutions.map((service) => {
+                const IconComponent = iconMap[service.icon] || Briefcase;
+                return (
+                  <div 
+                    key={service.id}
+                    className="w-[84vw] max-w-[340px] md:w-auto shrink-0 md:shrink snap-start md:snap-align-none group bg-[var(--background-card)] hover:bg-[var(--background-card-hover)] rounded-3xl p-6 sm:p-8 border border-[var(--border)] hover:border-[var(--accent-primary)] shadow-xl transition-all duration-300 flex flex-col justify-between hover:-translate-y-1 relative text-left"
+                  >
+                    <div>
+                      {/* Icon + Category Pill */}
+                      <div className="flex items-center justify-between mb-5 sm:mb-6">
+                        <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-[var(--icon-bg)] text-[var(--accent-primary)] border border-[var(--icon-border)] group-hover:bg-[var(--accent-primary)] group-hover:text-[var(--button-primary-text)] transition-colors duration-200 flex items-center justify-center shadow-sm">
+                          <IconComponent className="w-7 h-7 sm:w-8 sm:h-8 stroke-[1.75]" />
                         </div>
-                      ))}
+                        <span className="text-xs font-semibold px-3 py-1 rounded-full bg-[var(--background-secondary)] text-[var(--text-muted)] border border-[var(--border)]">
+                          Enterprise
+                        </span>
+                      </div>
+
+                      <h3 className="font-heading text-xl sm:text-2xl font-bold text-[var(--text-primary)] group-hover:text-[var(--accent-primary)] transition-colors">
+                        {service.title}
+                      </h3>
+
+                      <p className="text-sm sm:text-base text-[var(--text-secondary)] mt-2.5 sm:mt-3 leading-relaxed">
+                        {service.shortDesc}
+                      </p>
+
+                      {/* Bullet Deliverables */}
+                      <div className="mt-5 sm:mt-6 space-y-2 sm:space-y-2.5 border-t border-[var(--border)] pt-4 sm:pt-5">
+                        {service.features.slice(0, 3).map((feat, idx) => (
+                          <div key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-[var(--text-secondary)]">
+                            <Check className="w-4 h-4 text-[var(--accent-primary)] shrink-0 mt-0.5" />
+                            <span>{feat}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Actions */}
+                    <div className="pt-5 sm:pt-6 mt-6 sm:mt-8 border-t border-[var(--border)] flex items-center justify-between">
+                      <button
+                        onClick={() => onSelectService(service)}
+                        className="text-xs sm:text-sm font-bold text-[var(--text-secondary)] hover:text-[var(--accent-primary)] flex items-center gap-1 group/btn"
+                      >
+                        <span>Details</span>
+                        <ChevronRight className="w-3.5 h-3.5 group-hover/btn:translate-x-1 transition-transform text-[var(--accent-primary)]" />
+                      </button>
+                      <button
+                        onClick={() => onOpenHireModal(service.title)}
+                        className="px-4 sm:px-5 py-2 sm:py-2.5 text-xs sm:text-sm font-bold text-[var(--button-primary-text)] bg-[var(--button-primary)] hover:bg-[var(--button-primary-hover)] rounded-xl transition-colors shadow-sm"
+                      >
+                        Enquire Now
+                      </button>
                     </div>
                   </div>
-
-                  {/* Actions */}
-                  <div className="pt-6 mt-8 border-t border-[var(--border)] flex items-center justify-between">
-                    <button
-                      onClick={() => onSelectService(service)}
-                      className="text-sm font-bold text-[var(--text-secondary)] hover:text-[var(--accent-primary)] flex items-center gap-1 group/btn"
-                    >
-                      <span>Explore Details</span>
-                      <ChevronRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform text-[var(--accent-primary)]" />
-                    </button>
-                    <button
-                      onClick={() => onOpenHireModal(service.title)}
-                      className="px-5 py-2.5 text-xs sm:text-sm font-bold text-[var(--button-primary-text)] bg-[var(--button-primary)] hover:bg-[var(--button-primary-hover)] rounded-xl transition-colors shadow-sm"
-                    >
-                      Enquire Now
-                    </button>
-                  </div>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
         )}
 
@@ -185,9 +191,9 @@ export default function SolutionsSection({ onOpenHireModal, onSelectService }) {
               <h4 className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider mb-4">
                 Recruitment Strategy Components
               </h4>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="flex sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-4 overflow-x-auto sm:overflow-x-visible snap-x snap-mandatory sm:snap-none scrollbar-none pb-2 sm:pb-0 -mx-4 px-4 sm:mx-0 sm:px-0">
                 {sourcingData.engineComponents.map((comp, idx) => (
-                  <div key={idx} className="p-4 rounded-2xl bg-[var(--background-secondary)] border border-[var(--border)]">
+                  <div key={idx} className="w-[75vw] sm:w-auto shrink-0 snap-start p-4 rounded-2xl bg-[var(--background-secondary)] border border-[var(--border)]">
                     <div className="text-sm font-bold text-[var(--text-primary)] flex items-center gap-2">
                       <span className="w-2 h-2 rounded-full bg-[var(--accent-primary)]"></span>
                       {comp.title}
@@ -224,9 +230,9 @@ export default function SolutionsSection({ onOpenHireModal, onSelectService }) {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="flex md:grid md:grid-cols-3 gap-5 md:gap-6 overflow-x-auto md:overflow-x-visible snap-x snap-mandatory md:snap-none scrollbar-none pb-3 md:pb-0 -mx-4 px-4 md:mx-0 md:px-0">
               {hrConsultingData.services.map((item, idx) => (
-                <div key={idx} className="p-7 rounded-2xl bg-[var(--background-secondary)] border border-[var(--border)] flex flex-col justify-between">
+                <div key={idx} className="w-[84vw] max-w-[340px] md:w-auto shrink-0 md:shrink snap-start p-7 rounded-2xl bg-[var(--background-secondary)] border border-[var(--border)] flex flex-col justify-between">
                   <div>
                     <h4 className="text-xl font-bold text-[var(--text-primary)] font-heading mb-4 text-[var(--accent-primary)]">
                       {item.title}
