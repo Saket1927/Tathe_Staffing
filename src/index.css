@@ -1,0 +1,209 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ==========================================================================
+   GLOBAL DESIGN TOKENS & CLIENT PREVIEW THEME SYSTEM
+   ========================================================================== */
+
+:root,
+[data-theme="tathe"] {
+  /* THEME 1: TATHE ORIGINAL (Approved Dark Navy & Vibrant TATHE Green) */
+  --background-primary: #001326;
+  --background-secondary: #061B30;
+  --background-tertiary: #020F1D;
+  --background-card: #061B30;
+  --background-card-glass: rgba(6, 27, 48, 0.85);
+  --background-card-hover: #0A2542;
+  --background-header: rgba(0, 19, 38, 0.95);
+  --background-input: #001428;
+  --background-badge: rgba(0, 229, 117, 0.1);
+
+  --text-primary: #ffffff;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+  --text-inverse: #001326;
+
+  --accent-primary: #00e575;
+  --accent-secondary: #00A3FF;
+  --accent-tertiary: #FBBF24;
+  --accent-hover: #00cf69;
+
+  --button-primary: #00e575;
+  --button-primary-text: #001326;
+  --button-primary-hover: #00cf69;
+  --button-secondary: rgba(2, 24, 44, 0.7);
+  --button-secondary-text: #ffffff;
+  --button-secondary-border: rgba(148, 163, 184, 0.35);
+  --button-secondary-hover: rgba(255, 255, 255, 0.1);
+
+  --border: rgba(255, 255, 255, 0.1);
+  --border-subtle: rgba(255, 255, 255, 0.06);
+
+  --icon: #00e575;
+  --icon-bg: #001428;
+  --icon-border: rgba(13, 59, 97, 0.9);
+
+  --hero-overlay: linear-gradient(to right, #001326 0%, rgba(0, 19, 38, 0.75) 55%, transparent 100%);
+  --hero-bottom-fade: linear-gradient(to top, #001326 0%, transparent 100%);
+
+  --section-accent: #00e575;
+  --nav-active: #00e575;
+  --logo-text: #ffffff;
+  --logo-tagline: #cbd5e1;
+  
+  --pill-bg: rgba(1, 30, 56, 0.85);
+  --pill-border: rgba(11, 59, 100, 0.7);
+  --shadow-glow: 0 0 25px rgba(0, 229, 117, 0.35);
+}
+
+[data-theme="alternate"] {
+  /* THEME 2: ALTERNATE COLOUR VERSION (Electric Sapphire & Vivid Cyan) */
+  --background-primary: #080E1A;
+  --background-secondary: #0F172A;
+  --background-tertiary: #050912;
+  --background-card: #0F172A;
+  --background-card-glass: rgba(15, 23, 42, 0.85);
+  --background-card-hover: #1E293B;
+  --background-header: rgba(8, 14, 26, 0.95);
+  --background-input: #0A1020;
+  --background-badge: rgba(0, 210, 255, 0.1);
+
+  --text-primary: #ffffff;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+  --text-inverse: #080E1A;
+
+  --accent-primary: #00D2FF;
+  --accent-secondary: #3B82F6;
+  --accent-tertiary: #F59E0B;
+  --accent-hover: #00b8e6;
+
+  --button-primary: #00D2FF;
+  --button-primary-text: #080E1A;
+  --button-primary-hover: #00b8e6;
+  --button-secondary: rgba(15, 23, 42, 0.7);
+  --button-secondary-text: #ffffff;
+  --button-secondary-border: rgba(56, 189, 248, 0.35);
+  --button-secondary-hover: rgba(56, 189, 248, 0.15);
+
+  --border: rgba(56, 189, 248, 0.18);
+  --border-subtle: rgba(255, 255, 255, 0.06);
+
+  --icon: #00D2FF;
+  --icon-bg: #091325;
+  --icon-border: rgba(56, 189, 248, 0.3);
+
+  --hero-overlay: linear-gradient(to right, #080E1A 0%, rgba(8, 14, 26, 0.75) 55%, transparent 100%);
+  --hero-bottom-fade: linear-gradient(to top, #080E1A 0%, transparent 100%);
+
+  --section-accent: #00D2FF;
+  --nav-active: #00D2FF;
+  --logo-text: #ffffff;
+  --logo-tagline: #94a3b8;
+
+  --pill-bg: rgba(9, 19, 37, 0.9);
+  --pill-border: rgba(56, 189, 248, 0.3);
+  --shadow-glow: 0 0 25px rgba(0, 210, 255, 0.35);
+}
+
+[data-theme="light"] {
+  /* THEME 3: LIGHT THEME (Premium Enterprise Crisp White & Emerald) */
+  --background-primary: #FFFFFF;
+  --background-secondary: #F8FAFC;
+  --background-tertiary: #F1F5F9;
+  --background-card: #FFFFFF;
+  --background-card-glass: rgba(255, 255, 255, 0.92);
+  --background-card-hover: #F8FAFC;
+  --background-header: rgba(255, 255, 255, 0.96);
+  --background-input: #FFFFFF;
+  --background-badge: rgba(5, 150, 105, 0.1);
+
+  --text-primary: #0F172A;
+  --text-secondary: #334155;
+  --text-muted: #64748B;
+  --text-inverse: #FFFFFF;
+
+  --accent-primary: #059669;
+  --accent-secondary: #0284C7;
+  --accent-tertiary: #D97706;
+  --accent-hover: #047857;
+
+  --button-primary: #059669;
+  --button-primary-text: #FFFFFF;
+  --button-primary-hover: #047857;
+  --button-secondary: #FFFFFF;
+  --button-secondary-text: #0F172A;
+  --button-secondary-border: #CBD5E1;
+  --button-secondary-hover: #F8FAFC;
+
+  --border: #E2E8F0;
+  --border-subtle: #F1F5F9;
+
+  --icon: #059669;
+  --icon-bg: #ECFDF5;
+  --icon-border: #A7F3D0;
+
+  --hero-overlay: linear-gradient(to right, #FFFFFF 0%, rgba(255, 255, 255, 0.85) 55%, transparent 100%);
+  --hero-bottom-fade: linear-gradient(to top, #FFFFFF 0%, transparent 100%);
+
+  --section-accent: #059669;
+  --nav-active: #059669;
+  --logo-text: #0F172A;
+  --logo-tagline: #475569;
+
+  --pill-bg: #ECFDF5;
+  --pill-border: #A7F3D0;
+  --shadow-glow: 0 4px 20px rgba(5, 150, 105, 0.2);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+  
+  body {
+    background-color: var(--background-primary);
+    color: var(--text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    @apply antialiased selection:bg-brand-green/30 selection:text-white;
+  }
+
+  /* Smooth color and border transitions on theme cycle without image flash */
+  header, section, footer, nav, button, input, select, textarea {
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+  }
+}
+
+/* Custom scrollbar matching active theme */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--background-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-primary);
+}
+
+/* Logo marquee animation */
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  display: flex;
+  width: 200%;
+  animation: marquee 25s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
