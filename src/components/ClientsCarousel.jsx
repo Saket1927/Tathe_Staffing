@@ -1,175 +1,129 @@
 import React, { useState } from 'react';
-import { ShieldCheck, LayoutGrid, SlidersHorizontal } from 'lucide-react';
 import { clientLogos } from '../data/contentData';
+import { ArrowRight, ChevronUp } from 'lucide-react';
+
+const CATEGORIES = [
+  { id: 'all', label: 'All' },
+  { id: 'tech', label: 'IT & Tech' },
+  { id: 'manufacturing', label: 'Manufacturing' },
+  { id: 'bfsi', label: 'BFSI' },
+  { id: 'healthcare', label: 'Healthcare' },
+];
 
 export default function ClientsCarousel() {
-  const [viewMode, setViewMode] = useState('carousel'); // 'carousel' | 'grid'
+  const [activeCategory, setActiveCategory] = useState('all');
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  // Filter logos by category
+  const filteredLogos = activeCategory === 'all'
+    ? clientLogos
+    : clientLogos.filter(item => item.category === activeCategory);
+
+  // When unexpanded and count > 12, show 11 logos + 1 "+X more" card
+  const shouldTruncate = !isExpanded && filteredLogos.length > 12;
+  const displayedLogos = shouldTruncate ? filteredLogos.slice(0, 11) : filteredLogos;
+  const remainingCount = filteredLogos.length - 11;
+
+  const handleCategoryChange = (catId) => {
+    setActiveCategory(catId);
+    setIsExpanded(false);
+  };
 
   return (
-    <section className="bg-[var(--background-secondary)] py-14 sm:py-20 border-b border-[var(--border)] text-[var(--text-primary)] relative overflow-hidden">
+    <section className="bg-[var(--background-secondary)] py-12 sm:py-20 border-b border-[var(--border)] text-[var(--text-primary)] relative overflow-hidden">
       <div className="max-w-site mx-auto px-4 sm:px-8 lg:px-12">
         
-        {/* Section Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-10 sm:mb-12 gap-4 text-left">
-          <div>
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[var(--pill-bg)] border border-[var(--pill-border)] text-[var(--accent-primary)] text-xs font-bold uppercase tracking-wider mb-2.5">
-              <ShieldCheck className="w-3.5 h-3.5 text-[var(--accent-primary)]" />
-              <span>PROVEN CLIENT REPUTATION</span>
-            </div>
-            <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[var(--text-primary)] tracking-tight">
-              Trusted by Leading Organisations
-            </h2>
-            <p className="text-[var(--text-muted)] text-sm sm:text-base mt-2 max-w-2xl font-normal leading-relaxed">
-              Serving India’s most respected enterprises, automotive giants, pharmaceutical leaders, and high-growth businesses.
-            </p>
-          </div>
+        {/* Section Heading matching Design 7 */}
+        <div className="mb-6 sm:mb-8 text-left">
+          <p className="text-xs sm:text-sm font-bold uppercase tracking-widest text-[var(--accent-primary)] mb-2">
+            TRUSTED BY ORGANISATIONS ACROSS INDIA
+          </p>
+          <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight">
+            <span className="text-[var(--text-primary)] block">Leading brands.</span>
+            <span className="text-[var(--accent-primary)] block">Real opportunities.</span>
+          </h2>
+        </div>
 
-          {/* Toggle View */}
-          <div className="flex items-center gap-2 shrink-0">
-            <button
-              onClick={() => setViewMode(viewMode === 'carousel' ? 'grid' : 'carousel')}
-              className="px-4 py-2.5 rounded-xl bg-[var(--background-card)] hover:bg-[var(--background-card-hover)] border border-[var(--border)] text-[var(--text-primary)] text-xs sm:text-sm font-bold flex items-center gap-2 transition-colors focus:outline-none shadow-sm"
+        {/* Category Filters (Horizontal Scrollable Pills) */}
+        <div className="flex items-center gap-2 overflow-x-auto scrollbar-none pb-2 mb-6 sm:mb-8 -mx-4 px-4 sm:mx-0 sm:px-0">
+          {CATEGORIES.map((cat) => {
+            const isActive = activeCategory === cat.id;
+            return (
+              <button
+                key={cat.id}
+                onClick={() => handleCategoryChange(cat.id)}
+                className={`shrink-0 px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 ${
+                  isActive
+                    ? 'bg-[var(--button-primary)] text-[var(--button-primary-text)] shadow-md'
+                    : 'bg-[var(--background-card)] text-[var(--text-secondary)] border border-[var(--border)] hover:text-[var(--text-primary)] hover:border-[var(--border-hover)]'
+                }`}
+              >
+                {cat.label}
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Logo Grid: 3 columns on mobile (as per Design 7 mockup), 4-6 columns on larger screens */}
+        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-2.5 sm:gap-4">
+          {displayedLogos.map((brand, idx) => (
+            <div
+              key={`${brand.name}-${idx}`}
+              className="bg-white border border-slate-200/90 rounded-xl sm:rounded-2xl shadow-sm p-3 sm:p-4 flex items-center justify-center aspect-[3/2] sm:aspect-[4/3] group relative hover:border-[var(--accent-primary)] hover:shadow-md transition-all duration-200"
             >
-              {viewMode === 'carousel' ? (
+              <img
+                src={brand.src}
+                alt={brand.name}
+                className="max-h-8 sm:max-h-12 max-w-[85%] object-contain transition-transform duration-200 group-hover:scale-105"
+                onError={(e) => {
+                  if (brand.fallbackSrc && e.target.src !== brand.fallbackSrc) {
+                    e.target.src = brand.fallbackSrc;
+                  } else {
+                    e.target.style.display = 'none';
+                    e.target.parentElement.innerHTML = `<span class="text-[10px] sm:text-xs font-bold text-slate-800 text-center leading-tight px-1">${brand.name}</span>`;
+                  }
+                }}
+              />
+            </div>
+          ))}
+
+          {/* "+X more" dynamic card when truncated */}
+          {shouldTruncate && (
+            <button
+              onClick={() => setIsExpanded(true)}
+              className="bg-[var(--background-card)] border border-[var(--border)] hover:border-[var(--accent-primary)] rounded-xl sm:rounded-2xl shadow-sm p-2 sm:p-4 flex flex-col items-center justify-center aspect-[3/2] sm:aspect-[4/3] group cursor-pointer transition-all duration-200"
+            >
+              <span className="text-sm sm:text-lg font-extrabold text-[var(--accent-primary)] group-hover:scale-110 transition-transform">
+                +{remainingCount}
+              </span>
+              <span className="text-[10px] sm:text-xs font-semibold text-[var(--text-muted)] mt-0.5">
+                more
+              </span>
+            </button>
+          )}
+        </div>
+
+        {/* Bottom Expand / Collapse Button if items exceed 12 */}
+        {filteredLogos.length > 12 && (
+          <div className="mt-8 sm:mt-10 flex justify-center">
+            <button
+              onClick={() => setIsExpanded(!isExpanded)}
+              className="px-6 py-3 rounded-full bg-[var(--background-card)] hover:bg-[var(--background-card-hover)] border border-[var(--border)] hover:border-[var(--accent-primary)] text-[var(--text-primary)] font-semibold text-xs sm:text-sm transition-all duration-200 shadow-sm inline-flex items-center gap-2"
+            >
+              {isExpanded ? (
                 <>
-                  <LayoutGrid className="w-4 h-4 text-[var(--accent-primary)]" />
-                  <span>View All 26 Brands Grid</span>
+                  <span>Show less</span>
+                  <ChevronUp className="w-4 h-4 text-[var(--accent-primary)]" />
                 </>
               ) : (
                 <>
-                  <SlidersHorizontal className="w-4 h-4 text-[var(--accent-primary)]" />
-                  <span>View Continuous Marquee</span>
+                  <span>View all {filteredLogos.length} partners</span>
+                  <ArrowRight className="w-4 h-4 text-[var(--accent-primary)]" />
                 </>
               )}
             </button>
           </div>
-        </div>
-
-        {/* MOBILE VIEW (block md:hidden): Dedicated Touch-Controlled Swipe Carousel */}
-        <div className="block md:hidden">
-          <div className="flex items-center justify-between text-xs text-[var(--text-muted)] font-medium mb-3 px-1">
-            <span>Trusted by organisations across India</span>
-            <span className="text-[10px] text-[var(--accent-primary)] font-semibold flex items-center gap-1">
-              Swipe →
-            </span>
-          </div>
-
-          {/* Swipe Container (46% - 48% width per card showing 2 full cards + peek of 3rd) */}
-          <div className="flex gap-3 overflow-x-auto snap-x snap-mandatory scrollbar-none pb-2 -mx-4 px-4">
-            {clientLogos.map((brand, idx) => (
-              <div
-                key={`mobile-logo-${idx}`}
-                className="w-[47%] shrink-0 snap-start h-24 rounded-2xl bg-white border border-[var(--border)] shadow-sm p-3.5 flex items-center justify-center relative group"
-              >
-                <img
-                  src={brand.src}
-                  alt={brand.name}
-                  className="max-h-11 max-w-[85%] object-contain"
-                  onError={(e) => {
-                    if (brand.fallbackSrc && e.target.src !== brand.fallbackSrc) {
-                      e.target.src = brand.fallbackSrc;
-                    } else {
-                      e.target.style.display = 'none';
-                      e.target.parentElement.innerHTML = `<span class="text-xs font-bold text-slate-800">${brand.name}</span>`;
-                    }
-                  }}
-                />
-              </div>
-            ))}
-          </div>
-          <p className="text-[11px] text-[var(--text-muted)] text-center mt-3 font-normal">
-            Swipe horizontally to view all 26 partner brands
-          </p>
-        </div>
-
-        {/* DESKTOP VIEW (hidden md:block): Continuous Marquee or 26-Brand Grid */}
-        <div className="hidden md:block">
-          {viewMode === 'carousel' ? (
-            <div className="space-y-5">
-              {/* Row 1 - Marquee Left */}
-              <div className="relative w-full overflow-hidden mask-fade py-2">
-                <div className="flex items-center gap-6 sm:gap-8 w-max animate-marquee">
-                  {[...clientLogos, ...clientLogos].map((brand, idx) => (
-                    <div
-                      key={idx}
-                      className="h-22 sm:h-26 w-44 sm:w-52 px-6 py-4 rounded-2xl bg-white hover:bg-white border border-slate-200/90 hover:border-[var(--accent-primary)] shadow-sm hover:shadow-md transition-all duration-300 flex items-center justify-center shrink-0 group relative"
-                    >
-                      <img
-                        src={brand.src}
-                        alt={brand.name}
-                        className="max-h-12 sm:max-h-14 max-w-full object-contain transition-all duration-300 transform group-hover:scale-105 filter brightness-100 group-hover:brightness-105"
-                        onError={(e) => {
-                          if (brand.fallbackSrc && e.target.src !== brand.fallbackSrc) {
-                            e.target.src = brand.fallbackSrc;
-                          } else {
-                            e.target.style.display = 'none';
-                            e.target.parentElement.innerHTML = `<span class="text-xs font-bold text-slate-800">${brand.name}</span>`;
-                          }
-                        }}
-                      />
-                      <div className="absolute inset-0 rounded-2xl border-2 border-transparent group-hover:border-[var(--accent-primary)]/40 pointer-events-none transition-colors"></div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Row 2 - Marquee Right */}
-              <div className="relative w-full overflow-hidden mask-fade py-2">
-                <div 
-                  className="flex items-center gap-6 sm:gap-8 w-max animate-marquee"
-                  style={{ animationDirection: 'reverse', animationDuration: '32s' }}
-                >
-                  {[...clientLogos.slice().reverse(), ...clientLogos.slice().reverse()].map((brand, idx) => (
-                    <div
-                      key={idx}
-                      className="h-22 sm:h-26 w-44 sm:w-52 px-6 py-4 rounded-2xl bg-white hover:bg-white border border-slate-200/90 hover:border-[var(--accent-primary)] shadow-sm hover:shadow-md transition-all duration-300 flex items-center justify-center shrink-0 group relative"
-                    >
-                      <img
-                        src={brand.src}
-                        alt={brand.name}
-                        className="max-h-12 sm:max-h-14 max-w-full object-contain transition-all duration-300 transform group-hover:scale-105 filter brightness-100 group-hover:brightness-105"
-                        onError={(e) => {
-                          if (brand.fallbackSrc && e.target.src !== brand.fallbackSrc) {
-                            e.target.src = brand.fallbackSrc;
-                          } else {
-                            e.target.style.display = 'none';
-                            e.target.parentElement.innerHTML = `<span class="text-xs font-bold text-slate-800">${brand.name}</span>`;
-                          }
-                        }}
-                      />
-                      <div className="absolute inset-0 rounded-2xl border-2 border-transparent group-hover:border-[var(--accent-primary)]/40 pointer-events-none transition-colors"></div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          ) : (
-            /* View 2: Complete 26-Brand Logo Wall Grid */
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-5 sm:gap-6 pt-2">
-              {clientLogos.map((brand, idx) => (
-                <div
-                  key={idx}
-                  className="h-26 sm:h-30 px-6 py-4 rounded-2xl bg-white hover:bg-white border border-slate-200/90 hover:border-[var(--accent-primary)] shadow-sm hover:shadow-md transition-all duration-300 flex items-center justify-center group relative"
-                >
-                  <img
-                    src={brand.src}
-                    alt={brand.name}
-                    className="max-h-12 sm:max-h-14 max-w-full object-contain transition-all duration-300 transform group-hover:scale-105"
-                    onError={(e) => {
-                      if (brand.fallbackSrc && e.target.src !== brand.fallbackSrc) {
-                        e.target.src = brand.fallbackSrc;
-                      } else {
-                        e.target.style.display = 'none';
-                        e.target.parentElement.innerHTML = `<span class="text-xs font-bold text-slate-800">${brand.name}</span>`;
-                      }
-                    }}
-                  />
-                  <div className="absolute inset-0 rounded-2xl border-2 border-transparent group-hover:border-[var(--accent-primary)]/40 pointer-events-none transition-colors"></div>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
+        )}
 
       </div>
     </section>
